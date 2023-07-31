@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include <MultiDMX_STM32.h>
+#include <MultiDMX.h>
 
 PinName pins[DMX_UNIVERSES] = {PA_0, PA_1, PA_2, PA_3};  //, PA_4, PA_5, PB_0, PB_1};
 
