@@ -56,7 +56,7 @@ void setup() {
   dmx_config_t config = DMX_CONFIG_DEFAULT;
 
   for (uint8_t i = 0; i < DMX_UNIVERSES; i++) {
-    dmx_driver_install(1, &config, DMX_INTR_FLAGS_DEFAULT);
+    dmx_driver_install(i + 1, &config, DMX_INTR_FLAGS_DEFAULT);
     dmx_set_pin(i + 1, pins[i], DMX_PIN_NO_CHANGE, DMX_PIN_NO_CHANGE);
   }
 }
