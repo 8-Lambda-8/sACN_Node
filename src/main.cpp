@@ -14,7 +14,7 @@ Receiver sacnRecievers[] = {Receiver(udp, 1),   //
 
 #define DMX_UNIVERSES 2
 
-uint8_t pins[DMX_UNIVERSES] = {32, 33};
+uint8_t pins[DMX_UNIVERSES] = {15, 21};
 
 void dmxReceived_(uint8_t u) {
   Serial.println("Recieved");
