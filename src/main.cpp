@@ -40,11 +40,10 @@ void setup() {
     while (Ethernet.hardwareStatus() == EthernetNoHardware) {
       Serial.println("hardware Error");
       delay(10);
+      Ethernet.begin(mac, ip, dns);
     }
-  } else {
-    Ethernet.begin(mac, ip, dns);
-    Serial.println(Ethernet.localIP());
   }
+  Serial.println(Ethernet.localIP());
 
   for (uint8_t i = 0; i < DMX_UNIVERSES; i++) {
     sacnRecievers[i].callbackDMX(dmxRecieved[i]);
