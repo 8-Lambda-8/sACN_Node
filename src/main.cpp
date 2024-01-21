@@ -26,10 +26,17 @@ void dmxReceived_1() { dmxReceived_(1); }
 
 void (*dmxRecieved[])() = {dmxReceived_0, dmxReceived_1};
 
-void newSource() {
-  Serial.print("new soure name: ");
-  Serial.println(sacnRecievers[0].name());
+void newSource_(uint8_t u) {
+  Serial.print("[");
+  Serial.print(u);
+  Serial.print("] new soure name: ");
+  Serial.println(sacnRecievers[u].name());
 }
+
+void newSource_0() { newSource_(0); }
+void newSource_1() { newSource_(1); }
+
+void (*newSource[])() = {newSource_0, newSource_1};
 
 void setup() {
   Serial.begin(115200);
@@ -47,7 +54,7 @@ void setup() {
 
   for (uint8_t i = 0; i < DMX_UNIVERSES; i++) {
     sacnRecievers[i].callbackDMX(dmxRecieved[i]);
-    sacnRecievers[i].callbackSource(newSource);
+    sacnRecievers[i].callbackSource(newSource[i]);
     sacnRecievers[i].begin();
   }
 
