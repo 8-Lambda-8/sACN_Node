@@ -81,10 +81,11 @@ void loop() {
     sacnRecievers[i].receive();
     dmx_send(i + 1, DMX_PACKET_SIZE);
   }
-  if (millis() - timer > 1000) {
+
+  if (millis() - timer > 10000) {
     timer = millis();
     Serial.print("loops: ");
-    Serial.println(loops);
+    Serial.println(loops / 10);
     loops = 0;
   }
   loops++;
