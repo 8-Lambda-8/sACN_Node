@@ -4,14 +4,17 @@
 #include "Ethernet.h"
 #include "sACN.h"
 
+// Ethernet
 uint8_t mac[] = {0x90, 0xA2, 0xDA, 0x10, 0x14, 0x48};  // MAC Adress of your device
 IPAddress ip(10, 0, 0, 199);                           // IP address of your device
 IPAddress dns(10, 0, 0, 2);                            // DNS address of your device
 
+// sACN
 EthernetUDP udp;
 Receiver sacnRecievers[] = {Receiver(udp, 1),   //
                             Receiver(udp, 2)};  //
 
+// DMX
 #define DMX_UNIVERSES 2
 
 uint8_t pins[DMX_UNIVERSES] = {15, 21};
@@ -42,6 +45,7 @@ void setup() {
   Serial.begin(115200);
   Serial.println("begin");
 
+  // init Ethernet
   Ethernet.init(5);
   if (Ethernet.begin(mac) == 0) {
     while (Ethernet.hardwareStatus() == EthernetNoHardware) {
@@ -52,14 +56,15 @@ void setup() {
   }
   Serial.println(Ethernet.localIP());
 
+  // init sAcn
   for (uint8_t i = 0; i < DMX_UNIVERSES; i++) {
     sacnRecievers[i].callbackDMX(dmxRecieved[i]);
     sacnRecievers[i].callbackSource(newSource[i]);
     sacnRecievers[i].begin();
   }
-
   Serial.println("sACN start");
 
+  // init DMX
   dmx_config_t config = DMX_CONFIG_DEFAULT;
 
   for (uint8_t i = 0; i < DMX_UNIVERSES; i++) {
